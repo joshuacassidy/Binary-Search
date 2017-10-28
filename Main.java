@@ -1,16 +1,21 @@
-
 public class Main {
-    public static void main(String[] args) {
-        Integer [] a = {7,11,31,56,76,123,128,189,234,246,251,253,366,424,576,634,658,786};
 
-        System.out.println(recursiveBinarySearch(a,246,0,a.length-1));
+    public static void main(String[] args) {
+        Integer [] array = {7,11,31,56,76,123,128,189,234,246,251,253,366,424,576,634,658,786};
+        int recursiveBinarySearch = recursiveBinarySearch(array,246,0,array.length-1);
+        int binarySearch = binarySearch(array,31,0,array.length-1);
+
+        System.out.printf(recursiveBinarySearch == -1 ? "Number  was not found\n" : "%d was found at index %d in the array using recursive binary search.\n",246,recursiveBinarySearch);
+        System.out.printf(binarySearch == -1 ? "Number was not found\n" : "%d was found at index %d in the array using binary search.\n",31,binarySearch);
+        
     }
-    public static int binarySearch(Integer[] a, int numberToFind, int p, int r){
+
+    private static int binarySearch(Integer[] array, int numberToFind, int p, int r){
         while(p<=r){
             int q = (p + r)/2;
-            if(a[q] == numberToFind){
+            if(array[q] == numberToFind){
                 return q;
-            } else if(a[q] > numberToFind){
+            } else if(array[q] > numberToFind){
                 r = q - 1;
             } else{
                 p = q + 1;
@@ -19,18 +24,19 @@ public class Main {
         return -1;
     }
 
-    public static int recursiveBinarySearch(Integer a[], int numberToFind, int p, int r){
+    private static int recursiveBinarySearch(Integer array[], int numberToFind, int p, int r){
         if(p<=r){
             int q = (p + r)/2;
-            if(a[q] == numberToFind){
+            if(array[q] == numberToFind){
                 return q;
-            } else if(a[q] > numberToFind){
-                return recursiveBinarySearch(a,numberToFind, p,q - 1);
+            } else if(array[q] > numberToFind){
+                return recursiveBinarySearch(array,numberToFind, p,q - 1);
             } else{
-                return recursiveBinarySearch(a,numberToFind, q + 1,r);
+                return recursiveBinarySearch(array,numberToFind, q + 1,r);
             }
+        } else {
+            return -1;
         }
-        return -1;
     }
 
 }
